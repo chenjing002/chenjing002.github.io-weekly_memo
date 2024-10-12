@@ -36,12 +36,12 @@
         }
         h1 {
             text-align: center;
-            color: #3498db;
+            color: #457fca;
             margin-bottom: 20px;
         }
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #457fca;
+            border-bottom: 2px solid #457fca;
             padding-bottom: 10px;
             margin-top: 30px;
         }
@@ -139,6 +139,7 @@
         th {
             background-color: #f2f2f2;
             color: #2c3e50;
+            white-space: nowrap; /* 添加这一行 */
         }
         .preview-content {
             background-color: #ffffff;
@@ -155,7 +156,7 @@
             border-radius: 8px 8px 0 0;
         }
         .preview-content .header_this_week {
-            background-color: #3498db;
+            background-color: #457fca;
         }
         .preview-content .header_next_week {
             background-color: #2c3e50;
@@ -385,18 +386,23 @@
         }
 
         #copyHtmlBtn {
-            font-size: 16px;
-            padding: 12px 24px;
-            background-color: #4CAF50; /* An elegant, modern green */
+            font-size: 18px; /* 增加字体大小 */
+            font-weight: bold; /* 加粗字体 */
+            padding: 15px 30px; /* 增加内边距，使按钮更大 */
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 100%; /* 让按钮宽度占满容器 */
+            max-width: 300px; /* 设置最大宽度，避免在大屏幕上过宽 */
+            margin: 20px auto; /* 居中按钮并增加上下边距 */
+            display: block; /* 使margin: auto生效 */
         }
 
         #copyHtmlBtn:hover {
-            background-color: #45a049; /* Slightly darker shade for hover effect */
+            background-color: #45a049; /* 稍微深一点的绿色作为悬停效果 */
         }
 
         /* 保持原有样式 */
@@ -427,7 +433,7 @@
             text-align: center;
         }
         .header_this_week, .header_weekly_thoughts {
-            background-color: #3498db;
+            background-color: #457fca;
         }
         .header_next_week {
             background-color: #2c3e50;
@@ -436,6 +442,83 @@
             padding: 20px;
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* 添加这个新的样式 */
+        th:first-child, td:first-child {
+            width: 50px; /* 调整宽度以适应"序号"两个字 */
+            text-align: center;
+        }
+
+        /* 调整其他列的宽度 */
+        #thisWeekTable th:nth-child(2), #thisWeekTable td:nth-child(2),
+        #nextWeekTable th:nth-child(2), #nextWeekTable td:nth-child(2) { width: 15%; }
+        #thisWeekTable th:nth-child(3), #thisWeekTable td:nth-child(3) { width: 25%; }
+        #thisWeekTable th:nth-child(4), #thisWeekTable td:nth-child(4) { width: 15%; }
+        #thisWeekTable th:nth-child(5), #thisWeekTable td:nth-child(5) { width: 30%; }
+        #nextWeekTable th:nth-child(3), #nextWeekTable td:nth-child(3) { width: 75%; }
+
+        /* 在预览和生成的HTML中也应用这些样式 */
+        .preview-content th:first-child, .preview-content td:first-child { 
+            width: 50px;
+            text-align: center;
+        }
+        .preview-content th:nth-child(2), .preview-content td:nth-child(2) { width: 15%; }
+        .preview-content th:nth-child(3), .preview-content td:nth-child(3) { width: 75%; } /* 调整为75% */
+
+        /* 调整输入区域的列宽 */
+        #thisWeekTable th:nth-child(1), #thisWeekTable td:nth-child(1) { width: 50px; }
+        #thisWeekTable th:nth-child(2), #thisWeekTable td:nth-child(2) { width: 15%; }
+        #thisWeekTable th:nth-child(3), #thisWeekTable td:nth-child(3) { width: 25%; }
+        #thisWeekTable th:nth-child(4), #thisWeekTable td:nth-child(4) { width: 15%; }
+        #thisWeekTable th:nth-child(5), #thisWeekTable td:nth-child(5) { width: 30%; }
+        #thisWeekTable th:nth-child(6), #thisWeekTable td:nth-child(6) { width: 10%; }
+
+        /* 确保表格内容不会溢出 */
+        #thisWeekTable td, #nextWeekTable td {
+            word-break: break-word;
+            max-width: 0;
+        }
+
+        /* 调预览域列 */
+        .preview-content th:nth-child(1), .preview-content td:nth-child(1) { width: 50px; }
+        .preview-content th:nth-child(2), .preview-content td:nth-child(2) { width: 15%; }
+        .preview-content th:nth-child(3), .preview-content td:nth-child(3) { width: 25%; }
+        .preview-content th:nth-child(4), .preview-content td:nth-child(4) { width: 15%; }
+        .preview-content th:nth-child(5), .preview-content td:nth-child(5) { width: 30%; }
+
+        /* 确保选择框不会溢出 */
+        #thisWeekTable select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* 调整预览区域的下周工作计划表格列宽 */
+        .preview-content .header_next_week + table th:nth-child(1),
+        .preview-content .header_next_week + table td:nth-child(1) { width: 5%; }
+        .preview-content .header_next_week + table th:nth-child(2),
+        .preview-content .header_next_week + table td:nth-child(2) { width: 25%; } /* 增加到 25% */
+        .preview-content .header_next_week + table th:nth-child(3),
+        .preview-content .header_next_week + table td:nth-child(3) { width: 70%; } /* 减少到 70% */
+
+        #copyHtmlBtn {
+            /* ... 保持现有样式不变 ... */
+            margin-bottom: 5px; /* 减少底部边距，为提示留出空间 */
+        }
+
+        #copyHint {
+            display: none;
+            color: green;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .copy-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -499,8 +582,10 @@
         <div class="preview-section">
             <h2>预览</h2>
             <div id="preview" class="preview-content"></div>
-            <button id="copyHtmlBtn" type="button" onclick="copyHTML()">复制 HTML</button>
-            <span id="copyHint" style="display: none; color: green; margin-left: 10px;">已复制到剪贴板</span>
+            <div class="copy-container">
+                <button id="copyHtmlBtn" type="button" onclick="copyHTML()">复制 HTML</button>
+                <span id="copyHint">已复制到剪贴板</span>
+            </div>
         </div>
     </div>
 
@@ -603,9 +688,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>序号</th>
-                            <th>项目</th>
-                            <th>计划说明</th>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 25%;">项目</th>
+                            <th style="width: 70%;">计划说明</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -693,6 +778,7 @@
             background-color: #f2f2f2;
             font-weight: bold;
             color: #2c3e50;
+            white-space: nowrap;
         }
         tr:last-child td {
             border-bottom: none;
@@ -730,6 +816,14 @@
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
         }
+        th:first-child, td:first-child {
+            width: 50px;
+            text-align: center;
+        }
+        th:nth-child(2), td:nth-child(2) { width: 15%; }
+        th:nth-child(3), td:nth-child(3) { width: 75%; } /* 调整为75% */
+        th:nth-child(4), td:nth-child(4) { width: 15%; }
+        th:nth-child(5), td:nth-child(5) { width: 30%; }
     </style>
 </head>
 <body>
@@ -822,9 +916,9 @@
                 } else {
                     content += `
                 <tr>
-                    <td data-label="序号">${row.cells[0].textContent}</td>
-                    <td data-label="项目">${row.cells[1].querySelector('input').value}</td>
-                    <td data-label="计划说明">${row.cells[2].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
+                    <td style="width: 5%;" data-label="序号">${row.cells[0].textContent}</td>
+                    <td style="width: 25%;" data-label="项目">${row.cells[1].querySelector('input').value}</td>
+                    <td style="width: 70%;" data-label="计划说明">${row.cells[2].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
                 </tr>
                     `;
                 }
@@ -900,14 +994,15 @@
             vertical-align: top;
         }
         th:nth-child(1), td:nth-child(1) { width: 5%; }
-        th:nth-child(2), td:nth-child(2) { width: 15%; }
-        th:nth-child(3), td:nth-child(3) { width: 30%; }
+        th:nth-child(2), td:nth-child(2) { width: 20%; }
+        th:nth-child(3), td:nth-child(3) { width: 25%; }
         th:nth-child(4), td:nth-child(4) { width: 15%; }
         th:nth-child(5), td:nth-child(5) { width: 35%; }
         th {
             background-color: #f2f2f2;
             font-weight: bold;
             color: #2c3e50;
+            white-space: nowrap;
         }
         tr:last-child td {
             border-bottom: none;
@@ -945,6 +1040,14 @@
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
         }
+        th:first-child, td:first-child {
+            width: 50px;
+            text-align: center;
+        }
+        th:nth-child(2), td:nth-child(2) { width: 15%; }
+        th:nth-child(3), td:nth-child(3) { width: 75%; } /* 调整为75% */
+        th:nth-child(4), td:nth-child(4) { width: 15%; }
+        th:nth-child(5), td:nth-child(5) { width: 30%; }
     </style>
 </head>
 <body>
@@ -956,11 +1059,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>序号</th>
-                    <th>项目</th>
-                    <th>任务</th>
-                    <th>完成情况</th>
-                    <th>进展说明</th>
+                    <th style="width: 5%;">序号</th>
+                    <th style="width: 20%;">项目</th>
+                    <th style="width: 25%;">任务</th>
+                    <th style="width: 15%;">完成情况</th>
+                    <th style="width: 35%;">进展说明</th>
                 </tr>
             </thead>
             <tbody>
@@ -979,9 +1082,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>序号</th>
-                    <th>项目</th>
-                    <th>计划说明</th>
+                    <th style="width: 5%;">序号</th>
+                    <th style="width: 25%;">项目</th>
+                    <th style="width: 70%;">计划说明</th>
                 </tr>
             </thead>
             <tbody>
@@ -997,9 +1100,9 @@
             navigator.clipboard.writeText(memoHTML).then(() => {
                 // Show the copy hint
                 const copyHint = document.getElementById('copyHint');
-                copyHint.style.display = 'inline';
+                copyHint.style.display = 'block';
                 
-                // Hide the hint after 1 second (changed from 2 seconds)
+                // Hide the hint after 1 second
                 setTimeout(() => {
                     copyHint.style.display = 'none';
                 }, 1000);
