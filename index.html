@@ -498,15 +498,23 @@
 
         function deleteRow(btn) {
             const row = btn.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-            updateRowNumbers(row.parentNode);
+            const tbody = row.parentNode;
+            tbody.removeChild(row);
+            updateRowNumbers(tbody);
+            console.log('Row deleted, updating preview...');
             updatePreview();
         }
 
         function updateRowNumbers(tbody) {
-            const rows = tbody.rows;
+            const rows = tbody.getElementsByTagName('tr');
             for (let i = 0; i < rows.length; i++) {
+                // 更新显示的序号
                 rows[i].cells[0].textContent = i + 1;
+                // 更新输入字段的序号（如果存在）
+                const input = rows[i].cells[0].querySelector('input[type="number"]');
+                if (input) {
+                    input.value = i + 1;
+                }
             }
         }
 
@@ -516,10 +524,14 @@
         }
 
         function updatePreview() {
+            console.log('Updating preview...');
             const startDate = formatDate(document.getElementById('startDate').value);
             const endDate = formatDate(document.getElementById('endDate').value);
             const thisWeekContent = generateTableContent('thisWeekTable', true);
             const nextWeekContent = generateTableContent('nextWeekTable', false);
+
+            console.log('This week content:', thisWeekContent);
+            console.log('Next week content:', nextWeekContent);
 
             const previewHTML = `
                 <div class="header_this_week">
@@ -558,6 +570,7 @@
             `;
 
             document.getElementById('preview').innerHTML = previewHTML;
+            console.log('Preview updated');
         }
 
         function generateMemo() {
@@ -727,8 +740,9 @@
             const table = document.getElementById(tableId);
             let content = '';
             
-            for (let i = 1; i < table.rows.length; i++) {
-                const row = table.rows[i];
+            const rows = table.getElementsByTagName('tr');
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
                 if (includeStatus) {
                     const status = row.cells[3].querySelector('select').value;
                     const statusClass = `status-${status}`;
@@ -742,7 +756,7 @@
                     }
                     content += `
                 <tr>
-                    <td data-label="序号">${row.cells[0].textContent}</td>
+                    <td data-label="序号">${i}</td>
                     <td data-label="项目">${row.cells[1].querySelector('input').value}</td>
                     <td data-label="任务">${row.cells[2].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
                     <td data-label="完成情况"><span class="status ${statusClass}">${statusText}</span></td>
@@ -752,7 +766,7 @@
                 } else {
                     content += `
                 <tr>
-                    <td data-label="序号">${row.cells[0].textContent}</td>
+                    <td data-label="序号">${i}</td>
                     <td data-label="项目">${row.cells[1].querySelector('input').value}</td>
                     <td data-label="计划说明">${row.cells[2].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
                 </tr>
