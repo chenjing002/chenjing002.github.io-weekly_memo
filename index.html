@@ -398,6 +398,45 @@
         #copyHtmlBtn:hover {
             background-color: #45a049; /* Slightly darker shade for hover effect */
         }
+
+        /* 保持原有样式 */
+        #weeklyThoughts {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        .header_weekly_thoughts {
+            background-color: #27ae60;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .weekly-thoughts-content {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header_this_week, .header_weekly_thoughts, .header_next_week {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header_this_week, .header_weekly_thoughts {
+            background-color: #3498db;
+        }
+        .header_next_week {
+            background-color: #2c3e50;
+        }
+        .weekly-thoughts-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -434,6 +473,9 @@
                     </tbody>
                 </table>
                 <button type="button" onclick="addRow('thisWeekTable')">添加行</button>
+                
+                <h2>本周收获/思考</h2>
+                <textarea id="weeklyThoughts" rows="4" placeholder="想写就写，不想写就空着..." oninput="updatePreview()"></textarea>
                 
                 <h2>下周工作计划</h2>
                 <table id="nextWeekTable">
@@ -523,9 +565,11 @@
             const startDate = formatDate(document.getElementById('startDate').value);
             const endDate = formatDate(document.getElementById('endDate').value);
             const thisWeekContent = generateTableContent('thisWeekTable', true);
+            const weeklyThoughts = document.getElementById('weeklyThoughts').value.replace(/\n/g, '<br>');
             const nextWeekContent = generateTableContent('nextWeekTable', false);
 
             console.log('This week content:', thisWeekContent);
+            console.log('Weekly thoughts:', weeklyThoughts);
             console.log('Next week content:', nextWeekContent);
 
             const previewHTML = `
@@ -547,6 +591,12 @@
                         ${thisWeekContent}
                     </tbody>
                 </table>
+                <div class="header_weekly_thoughts">
+                    <h1>本周收获/思考</h1>
+                </div>
+                <div class="weekly-thoughts-content">
+                    ${weeklyThoughts}
+                </div>
                 <div class="header_next_week">
                     <h1>下周工作计划</h1>
                 </div>
@@ -569,10 +619,10 @@
         }
 
         function generateMemo() {
-            // This function can be kept for future use if needed, but it won't be visible to users
             const startDate = formatDate(document.getElementById('startDate').value);
             const endDate = formatDate(document.getElementById('endDate').value);
             const thisWeekContent = generateTableContent('thisWeekTable', true);
+            const weeklyThoughts = document.getElementById('weeklyThoughts').value.replace(/\n/g, '<br>');
             const nextWeekContent = generateTableContent('nextWeekTable', false);
 
             const memoHTML = `
@@ -599,12 +649,12 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        .header_this_week, .header_next_week {
+        .header_this_week, .header_weekly_thoughts, .header_next_week {
             color: white;
             padding: 20px;
             text-align: center;
         }
-        .header_this_week {
+        .header_this_week, .header_weekly_thoughts {
             background-color: #3498db;
         }
         .header_next_week {
@@ -675,6 +725,11 @@
         .status-paused::before { background-color: #ffa500; }
         .status-overdue { color: #dc3545; background-color: #ffe6e6; }
         .status-overdue::before { background-color: #dc3545; }
+        .weekly-thoughts-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -697,6 +752,12 @@
                 ${thisWeekContent}
             </tbody>
         </table>
+        <div class="header_weekly_thoughts">
+            <h1>本周收获/思考</h1>
+        </div>
+        <div class="weekly-thoughts-content">
+            ${weeklyThoughts}
+        </div>
         <div class="header_next_week">
             <h1>下周工作计划</h1>
         </div>
@@ -776,6 +837,7 @@
             const startDate = formatDate(document.getElementById('startDate').value);
             const endDate = formatDate(document.getElementById('endDate').value);
             const thisWeekContent = generateTableContent('thisWeekTable', true);
+            const weeklyThoughts = document.getElementById('weeklyThoughts').value.replace(/\n/g, '<br>');
             const nextWeekContent = generateTableContent('nextWeekTable', false);
 
             const memoHTML = `
@@ -802,12 +864,12 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        .header_this_week, .header_next_week {
+        .header_this_week, .header_weekly_thoughts, .header_next_week {
             color: white;
             padding: 20px;
             text-align: center;
         }
-        .header_this_week {
+        .header_this_week, .header_weekly_thoughts {
             background-color: #3498db;
         }
         .header_next_week {
@@ -878,6 +940,11 @@
         .status-paused::before { background-color: #ffa500; }
         .status-overdue { color: #dc3545; background-color: #ffe6e6; }
         .status-overdue::before { background-color: #dc3545; }
+        .weekly-thoughts-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -900,6 +967,12 @@
                 ${thisWeekContent}
             </tbody>
         </table>
+        <div class="header_weekly_thoughts">
+            <h1>本周收获/思考</h1>
+        </div>
+        <div class="weekly-thoughts-content">
+            ${weeklyThoughts}
+        </div>
         <div class="header_next_week">
             <h1>下周工作计划</h1>
         </div>
