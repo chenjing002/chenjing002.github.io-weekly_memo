@@ -66,6 +66,7 @@
             margin-bottom: 20px;
         }
         .date-input {
+            position: relative;
             display: flex;
             align-items: center;
             margin-right: 20px;
@@ -74,12 +75,25 @@
             margin-right: 10px;
             white-space: nowrap;
         }
+        .date-input-wrapper {
+            position: relative;
+            width: 180px;
+        }
         .date-input input[type="date"] {
-            width: 180px; /* Increased width */
+            width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
+            cursor: pointer;
+        }
+        .date-input-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
         }
         button {
             background-color: #434343;
@@ -531,11 +545,17 @@
                 <div class="date-inputs">
                     <div class="date-input">
                         <label for="startDate">开始日期:</label>
-                        <input type="date" id="startDate" required onchange="updatePreview()">
+                        <div class="date-input-wrapper">
+                            <input type="date" id="startDate" required onchange="updatePreview()">
+                            <div class="date-input-overlay" onclick="openDatePicker('startDate')"></div>
+                        </div>
                     </div>
                     <div class="date-input">
                         <label for="endDate">结束日期:</label>
-                        <input type="date" id="endDate" required onchange="updatePreview()">
+                        <div class="date-input-wrapper">
+                            <input type="date" id="endDate" required onchange="updatePreview()">
+                            <div class="date-input-overlay" onclick="openDatePicker('endDate')"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -1115,6 +1135,10 @@
         addRow('thisWeekTable');
         addRow('nextWeekTable');
         updatePreview();
+
+        function openDatePicker(inputId) {
+            document.getElementById(inputId).showPicker();
+        }
     </script>
 </body>
 </html>
