@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周报生成器</title>
+    <!-- 移除 Font Awesome 的 CSS 链接 -->
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -38,10 +39,11 @@
             text-align: center;
             color: #457fca;
             margin-bottom: 20px;
+            letter-spacing: 2px; /*  增加字间距  */
         }
         h2 {
-            color: #457fca;
-            border-bottom: 2px solid #457fca;
+            color: #666666;
+            border-bottom: 1px solid #dfdfdf;
             padding-bottom: 10px;
             margin-top: 30px;
         }
@@ -542,16 +544,34 @@
 
         /* 可以考虑给预览区域的标题添加一些样式 */
         .preview-section h2 {
-            color: #457fca;
+            color: #666666;
             margin-bottom: 15px;
             font-size: 24px;
+        }
+
+        /* 修改图标样式 */
+        .title-icon {
+            width: 1.2em; /* 调整图标大小 */
+            height: 1.2em;
+            margin-right: 10px;
+            vertical-align: middle; /* 使图标与文字垂直对齐 */
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="input-section">
-            <h1>周报生成器</h1>
+            <!-- 修改标题，使用新的 SVG 图标 -->
+            <h1>
+                <img src="calendar-pen.svg" alt="Calendar Pen Icon" class="title-icon">
+                周报生成器
+            </h1>
             <form id="memoForm">
                 <!-- Replace the date picker input with these two date inputs -->
                 <div class="date-inputs">
@@ -942,7 +962,7 @@
                     <td data-label="项目">${row.cells[1].querySelector('input').value}</td>
                     <td data-label="任务">${row.cells[2].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
                     <td data-label="完成情况"><span class="status ${statusClass}">${statusText}</span></td>
-                    <td data-label="进��说明">${row.cells[4].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
+                    <td data-label="进说明">${row.cells[4].querySelector('textarea').value.replace(/\n/g, '<br>')}</td>
                 </tr>
                     `;
                 } else {
